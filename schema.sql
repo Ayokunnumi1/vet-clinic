@@ -53,3 +53,20 @@ CREATE TABLE vets (
 	date_of_graduation date NULL,
 	PRIMARY KEY(id)
 );
+
+CREATE TABLE specializations (
+    species_id INT,
+	CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id),
+	vets_id INT,
+	CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id),
+	PRIMARY KEY (species_id, vets_id)
+);
+
+CREATE TABLE visits (
+    animals_id INT,
+	CONSTRAINT fk_animals FOREIGN KEY(animals_id) REFERENCES animals(id),
+    vets_id INT,
+	CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id),
+	visit_date date,
+	PRIMARY KEY (animals_id, vets_id, visit_date)
+);
